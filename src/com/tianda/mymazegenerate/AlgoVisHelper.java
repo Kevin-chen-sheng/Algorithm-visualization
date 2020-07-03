@@ -1,4 +1,4 @@
-package com.tianda.mymazevisual01;
+package com.tianda.mymazegenerate;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;

@@ -1,4 +1,4 @@
-package com.tianda.mymazevisual01;
+package com.tianda.mymazevisual02;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 
+//这叫数据层
 public class MazeData {
 
     public static final char ROAD = ' ';

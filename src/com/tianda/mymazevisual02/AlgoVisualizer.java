@@ -1,8 +1,10 @@
-package com.tianda.mymazevisual01;
+package com.tianda.mymazevisual02;
 
 import java.awt.*;
+import java.util.LinkedList;
 import java.util.Stack;
 
+//这叫控制层
 public class AlgoVisualizer {
 
     private static int DELAY = 5;
@@ -12,6 +14,7 @@ public class AlgoVisualizer {
     private AlgoFrame frame;
     private static final int d[][] = {{-1,0},{0,1},{1,0},{0,-1}};
 
+    //这个构造方法,都是用来初始化的
     //非递归DFS,其实就是用stack,入栈出栈,重要之处在栈顶元素
     public AlgoVisualizer(String mazeFile){
 
@@ -34,17 +37,22 @@ public class AlgoVisualizer {
 
         setData(-1, -1, false);
 
-        Stack<Position> stack = new Stack<Position>();
+
+        //使用队列做BFS遍历,如果有多个解,BFS会找到最短的解,dfs就不会,他只会找到第一个找到的那个解
+        //dfs和bfs使用不同的数据结构,但是逻辑是一样的
+        LinkedList<Position> queue = new LinkedList<>();
         Position entrance = new Position(data.getEntranceX(), data.getEntranceY());
-        stack.push(entrance);
+        //从队尾入队
+        queue.addLast(entrance);
         data.visited[entrance.getX()][entrance.getY()] = true;
 
         boolean isSolved = false;
 
-        while(!stack.empty()){
-            Position curPos = stack.pop();
+        while(queue.size()!=0){
+            Position curPos = queue.pop();
             setData(curPos.getX(), curPos.getY(), true);
 
+            //这一段是找到出口,才来调用
             if(curPos.getX() == data.getExitX() && curPos.getY() == data.getExitY()){
                 isSolved = true;
                 findPath(curPos);
@@ -58,7 +66,7 @@ public class AlgoVisualizer {
                 if(data.inArea(newX, newY)
                         && !data.visited[newX][newY]
                         && data.getMaze(newX, newY) == MazeData.ROAD){
-                    stack.push(new Position(newX, newY, curPos));
+                    queue.addLast(new Position(newX, newY, curPos));
                     data.visited[newX][newY] = true;
                 }
             }

@@ -1,10 +1,8 @@
-package com.tianda.mymazevisual01;
+package com.tianda.mymazevisual02;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
-
 import java.awt.geom.Rectangle2D;
-import java.lang.InterruptedException;
 
 
 public class AlgoVisHelper {

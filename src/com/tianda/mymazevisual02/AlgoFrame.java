@@ -1,8 +1,9 @@
-package com.tianda.mymazevisual01;
+package com.tianda.mymazevisual02;
 
-import java.awt.*;
 import javax.swing.*;
+import java.awt.*;
 
+//这叫视图层
 public class AlgoFrame extends JFrame{
 
     private int canvasWidth;

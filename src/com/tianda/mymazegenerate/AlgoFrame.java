@@ -1,4 +1,4 @@
-package com.tianda.mymazevisual01;
+package com.tianda.mymazegenerate;
 
 import java.awt.*;
 import javax.swing.*;
@@ -54,11 +54,11 @@ public class AlgoFrame extends JFrame{
             Graphics2D g2d = (Graphics2D)g;
 
             // 抗锯齿
-//            RenderingHints hints = new RenderingHints(
-//                    RenderingHints.KEY_ANTIALIASING,
-//                    RenderingHints.VALUE_ANTIALIAS_ON);
-//            hints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-//            g2d.addRenderingHints(hints);
+            RenderingHints hints = new RenderingHints(
+                    RenderingHints.KEY_ANTIALIASING,
+                    RenderingHints.VALUE_ANTIALIAS_ON);
+            hints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+            g2d.addRenderingHints(hints);
 
             // 具体绘制
             int w = canvasWidth/data.M();
@@ -66,19 +66,21 @@ public class AlgoFrame extends JFrame{
 
             for(int i = 0 ; i < data.N() ; i ++ )
                 for(int j = 0 ; j < data.M() ; j ++){
-                    if (data.getMaze(i,j) == MazeData.WALL)
-                        AlgoVisHelper.setColor(g2d, AlgoVisHelper.LightBlue);
-                    else
-                        AlgoVisHelper.setColor(g2d, AlgoVisHelper.White);
 
-                    if(data.path[i][j])
-                        AlgoVisHelper.setColor(g2d, AlgoVisHelper.Yellow);
+                    if(data.inMist[i][j])
+                        AlgoVisHelper.setColor(g2d, AlgoVisHelper.Black);
+                    else{
+                        if(data.maze[i][j] == MazeData.WALL)
+                            AlgoVisHelper.setColor(g2d, AlgoVisHelper.LightBlue);
+                        else
+                            AlgoVisHelper.setColor(g2d, AlgoVisHelper.White);
 
-                    if(data.result[i][j])
-                        AlgoVisHelper.setColor(g2d, AlgoVisHelper.Red);
+                        if(data.path[i][j])
+                            AlgoVisHelper.setColor(g2d, AlgoVisHelper.Yellow);
+                    }
 
                     AlgoVisHelper.fillRectangle(g2d, j * w, i * h, w, h);
-                }
+            }
         }
 
         @Override
@@ -87,3 +89,4 @@ public class AlgoFrame extends JFrame{
         }
     }
 }
+
